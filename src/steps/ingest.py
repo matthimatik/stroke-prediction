@@ -1,7 +1,8 @@
 import pandas as pd
 
 
-def load_stroke_dataset_csv_as_dataframe(location: str) -> pd.DataFrame:
+
+def load_stroke_dataset_csv_as_dataframe(location: str, file_format: str) -> pd.DataFrame:
     """Load content from the specified stroke dataset csv file as a Pandas DataFrame."""
     df = pd.read_csv(
         location,
@@ -23,5 +24,19 @@ def load_stroke_dataset_csv_as_dataframe(location: str) -> pd.DataFrame:
         na_values=["Unknown"],
     )
     df.drop(["id"], axis=1, inplace=True)
+
+    return df
+
+
+def load_and_convert_stroke_dataset(location: str, file_format: str) -> pd.DataFrame:
+    """
+    Load stroke dataset csv file as a Pandas DataFrame and convert categorical columns to strings.
+    Keeping NaN values unchanged.
+    """
+    df = load_stroke_dataset_csv_as_dataframe(location, file_format)
+
+    # Convert categorical columns to strings while keeping NaN values unchanged
+    for col in df.select_dtypes(include=['category']).columns:
+        df[col] = df[col].astype(str)
 
     return df

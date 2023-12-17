@@ -2,7 +2,7 @@
 # FIXME::REQUIRED: set an MLflow experiment name to track recipe executions and artifacts.
 #
 experiment:
-  name: ""
+  name: "test"
   tracking_uri: "sqlite:///metadata/mlflow/mlruns.db"
   artifact_location: "./metadata/mlflow/mlartifacts"
 model_registry:
@@ -12,15 +12,16 @@ model_registry:
 #   uri: "sqlite:///metadata/mlflow/registry.db"
 # FIXME::REQUIRED: Specifies the name of the Registered Model to use when registering a trained
 #                  model to the MLflow Model Registry.
-  model_name: ""
+  model_name: "predict_stroke"
 
 INGEST_CONFIG:
   #
   # FIXME::REQUIRED: Specify the format of the training and evaluation dataset. Natively supported
   #                  formats are: parquet, spark_sql, delta.
-  using: ""
+  using: csv
   # FIXME::OPTIONAL: Specify the training and evaluation data location.
-  location: "../data/raw/healthcare-dataset-stroke-data.csv"
+  location: "data/raw/healthcare-dataset-stroke-data.csv"
+  loader_method: load_and_convert_stroke_dataset
 
 # INGEST_SCORING_CONFIG:
 #   For different options please read: https://github.com/mlflow/recipes-classification-template#batch-scoring

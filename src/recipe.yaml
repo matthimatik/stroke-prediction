@@ -17,14 +17,14 @@
 
 recipe: "classification/v1"
 # FIXME::REQUIRED: Specifies the target column name for model training and evaluation.
-target_col: ""
+target_col: "stroke"
 # FIXME::REQUIRED: Specifies the value of `target_col` that is considered the positive class.
-positive_class: ""
+positive_class: "True"
 # FIXME::REQUIRED: Sets the primary metric to use to evaluate model performance. This primary
 #                  metric is used to select best performing models in MLflow UI as well as in
 #                  train and evaluation step.
 #                  Built-in primary metrics are: recall_score, precision_score, f1_score, accuracy_score.
-primary_metric: ""
+primary_metric: "f1_score"
 steps:
   # Specifies the dataset to use for model development
   ingest: {{INGEST_CONFIG}}
@@ -38,10 +38,12 @@ steps:
     #                   applies input feature transformation during model training and inference.
     transformer_method: transformer_fn
   train:
-    #
-    # FIXME::REQUIRED: Specifies the method to use for training. Options are "automl/flaml" for
-    #                  AutoML training or "custom" for user-defined estimators.
-    using: ""
+    using: "automl/flaml"
+    time_budget_secs: 120  # Example time budget
+    flaml_params:
+      task: "classification"
+      metric: "f1_score"
+      estimator_list: ["rf", "lrl1"]
   evaluate:
     #
     # FIXME::OPTIONAL: Sets performance thresholds that a trained model must meet in order to be

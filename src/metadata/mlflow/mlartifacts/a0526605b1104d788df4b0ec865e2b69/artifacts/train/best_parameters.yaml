@@ -1,6 +1,0 @@
-# automl parameters 
-criterion: gini
-max_features: 0.4181197517997645
-max_leaves: '90'
-n_estimators: '4'
-

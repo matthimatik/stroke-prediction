@@ -1,0 +1,8 @@
+// {
+//     "search.exclude": {
+//         "**/mlartifacts/*": true,
+//     },
+//     "files.exclude": {
+//         "**/mlartifacts/*": true,
+//     }
+// }

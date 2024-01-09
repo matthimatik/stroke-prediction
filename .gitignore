@@ -1,4 +1,13 @@
 *.pyc
-**/.venv
+.venv
 **/*.egg-info
 **/__pycache__
+metadata
+mlruns
+
+.mypy_cache/
+.pytest_cache/
+data/
+# python gitignore
+*.py[cod]
+*$py
